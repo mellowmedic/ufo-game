@@ -1,0 +1,269 @@
+/* Reset default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+}
+
+/* Game container and canvas */
+#game-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#game-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+}
+
+/* UI Overlay elements */
+#ui-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Allow clicks to pass through to canvas */
+}
+
+#score-display {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: #33ff33;
+    font-size: 20px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+#health-display {
+    position: absolute;
+    top: 60px;
+    left: 20px;
+    color: #33ff33;
+    font-size: 20px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.health-icon {
+    color: #ff3333;
+    margin-right: 5px;
+}
+
+/* Controls info */
+#controls-info {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: #33ff33;
+    font-size: 14px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #33ff33;
+}
+
+/* Overlay screens (start, pause, game over, help) */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #33ff33;
+    pointer-events: auto; /* Enable interaction with buttons */
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Buttons */
+button {
+    padding: 12px 24px;
+    margin-top: 20px;
+    font-size: 18px;
+    background-color: #33ff33;
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+}
+
+button:hover {
+    background-color: #00cc00;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px #33ff33;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+/* Game title and headings */
+h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #33ff33;
+    letter-spacing: 2px;
+}
+
+h2 {
+    font-size: 24px;
+    margin: 15px 0;
+    text-shadow: 0 0 5px #33ff33;
+}
+
+p {
+    font-size: 18px;
+    margin-bottom: 10px;
+    max-width: 600px;
+}
+
+/* High score display */
+.high-score {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid #33ff33;
+    border-radius: 5px;
+    max-width: 400px;
+}
+
+.high-score ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: left;
+}
+
+.high-score li {
+    padding: 5px 0;
+    font-size: 16px;
+}
+
+/* Help screen */
+.help-content {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 1px solid #33ff33;
+    border-radius: 5px;
+    max-width: 600px;
+    text-align: left;
+}
+
+.help-content ul {
+    list-style-type: none;
+    padding: 10px 0;
+    margin-left: 20px;
+}
+
+.help-content li {
+    padding: 5px 0;
+}
+
+.help-content strong {
+    color: #ffffff;
+}
+
+/* Mini-map */
+#mini-map {
+    box-shadow: 0 0 15px #33ff33;
+    animation: pulse 2s infinite alternate;
+}
+
+@keyframes pulse {
+    from {
+        box-shadow: 0 0 5px #33ff33;
+    }
+    to {
+        box-shadow: 0 0 15px #33ff33;
+    }
+}
+
+/* Volume controls */
+#volume-controls {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #33ff33;
+    color: #33ff33;
+    pointer-events: auto;
+}
+
+.volume-slider {
+    width: 100px;
+    margin: 5px 0;
+}
+
+/* Retro scanline effect for UI elements */
+.overlay::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Make sure content is above scanlines */
+.overlay > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* Flicker animation for retro text */
+@keyframes textFlicker {
+    0% { opacity: 1.0; }
+    92% { opacity: 1.0; }
+    93% { opacity: 0.8; }
+    94% { opacity: 1.0; }
+    97% { opacity: 1.0; }
+    98% { opacity: 0.5; }
+    100% { opacity: 1.0; }
+}
+
+h1 {
+    animation: textFlicker 3s infinite;
+}
+
+/* Retro font loading */
+@font-face {
+    font-family: 'Press Start 2P';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/pressstart2p/v14/e3t4euO8T-267oIAQAu6jDQyK3nVivM.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro UFO Game</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="game-canvas"></canvas>
+        <div id="ui-overlay">
+            <div id="score-display">Score: <span id="score">0</span></div>
+            <div id="health-display">Health: <span id="health">3</span></div>
+            <div id="controls-info">
+                <p>Arrow Keys: Move UFO</p>
+                <p>Space: Ascend | Shift: Descend</p>
+                <p>E: Activate Tractor Beam</p>
+                <p>P: Pause | M: Mute</p>
+            </div>
+            <div id="volume-controls">
+                <div>
+                    <label for="master-volume">Volume:</label>
+                    <input type="range" id="master-volume" class="volume-slider" min="0" max="100" value="70">
+                </div>
+                <div>
+                    <label for="music-volume">Music:</label>
+                    <input type="range" id="music-volume" class="volume-slider" min="0" max="100" value="50">
+                </div>
+                <div>
+                    <label for="sfx-volume">SFX:</label>
+                    <input type="range" id="sfx-volume" class="volume-slider" min="0" max="100" value="100">
+                </div>
+                <button id="mute-button">Mute</button>
+            </div>
+            <div id="start-screen" class="overlay">
+                <h1>Retro UFO Game</h1>
+                <p>Abduct cows while avoiding enemy jets!</p>
+                <button id="start-button">Start Game</button>
+                <!-- High score display will be added here by GameStateManager -->
+            </div>
+            <div id="game-over-screen" class="overlay hidden">
+                <h1>Game Over</h1>
+                <p>Final Score: <span id="final-score">0</span></p>
+                <!-- High score display will be added here by GameStateManager -->
+                <button id="restart-button">Play Again</button>
+            </div>
+            <!-- Pause and Help screens will be added by GameStateManager -->
+        </div>
+    </div>
+
+    <!-- Three.js Library and modules -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/postprocessing/EffectComposer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/postprocessing/RenderPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/postprocessing/ShaderPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/shaders/CopyShader.js"></script>
+    
+    <!-- Game Modules -->
+    <script src="js/soundManager.js"></script>
+    <script src="js/visualEffects.js"></script>
+    <script src="js/gameStateManager.js"></script>
+    <script src="js/particleSystem.js"></script>
+    <script src="js/miniMap.js"></script>
+    
+    <!-- Main Game Script -->
+    <script src="js/main.js"></script>
+</body>
+</html>
