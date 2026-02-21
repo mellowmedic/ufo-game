@@ -56,7 +56,6 @@ const keys = {
     Space: false,
     Shift: false,
     KeyE: false, // Tractor beam
-    KeyP: false, // Pause
     KeyM: false  // Mute
 };
 
@@ -739,15 +738,6 @@ function setupControls() {
         if (event.code === 'KeyE') {
             keys.KeyE = true;
         }
-        if (event.code === 'KeyP') {
-            keys.KeyP = true;
-            // Toggle pause state
-            if (gameStateManager.isGameActive()) {
-                gameStateManager.pauseGame();
-            } else if (gameStateManager.getState() === gameStateManager.states.PAUSED) {
-                gameStateManager.resumeGame();
-            }
-        }
         if (event.code === 'KeyM') {
             keys.KeyM = true;
             // Toggle mute
@@ -770,9 +760,6 @@ function setupControls() {
         }
         if (event.code === 'KeyE') {
             keys.KeyE = false;
-        }
-        if (event.code === 'KeyP') {
-            keys.KeyP = false;
         }
         if (event.code === 'KeyM') {
             keys.KeyM = false;
