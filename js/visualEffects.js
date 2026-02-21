@@ -270,6 +270,7 @@ class VisualEffects {
      */
     render() {
         if (!this.initialized || !this.composer) {
+            this.renderer.render(this.scene, this.camera);
             return;
         }
 
