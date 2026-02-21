@@ -1126,7 +1126,8 @@ function spawnJet() {
 
 // Update missiles
 function updateMissiles() {
-    missiles.forEach((missile, index) => {
+    for (let missileIndex = missiles.length - 1; missileIndex >= 0; missileIndex--) {
+        const missile = missiles[missileIndex];
         // Move missile in its direction
         missile.position.add(
             missile.userData.direction.clone().multiplyScalar(missile.userData.speed)
@@ -1145,15 +1146,16 @@ function updateMissiles() {
             }
             
             scene.remove(missile);
-            missiles.splice(index, 1);
+            missiles.splice(missileIndex, 1);
         }
-    });
+    }
 }
 
 // Check for collisions between objects
 function checkCollisions() {
     // Check UFO collision with jets
-    jets.forEach((jet, jetIndex) => {
+    for (let jetIndex = jets.length - 1; jetIndex >= 0; jetIndex--) {
+        const jet = jets[jetIndex];
         const distance = jet.position.distanceTo(ufo.position);
         if (distance < (ufo.userData.radius + jet.userData.radius)) {
             // Collision detected
@@ -1176,10 +1178,11 @@ function checkCollisions() {
             // Damage player
             damagePlayer();
         }
-    });
+    }
     
     // Check UFO collision with missiles
-    missiles.forEach((missile, missileIndex) => {
+    for (let missileIndex = missiles.length - 1; missileIndex >= 0; missileIndex--) {
+        const missile = missiles[missileIndex];
         const distance = missile.position.distanceTo(ufo.position);
         if (distance < (ufo.userData.radius + missile.userData.radius)) {
             // Collision detected
@@ -1197,7 +1200,7 @@ function checkCollisions() {
             // Damage player
             damagePlayer();
         }
-    });
+    }
 }
 
 // Apply damage to the player
