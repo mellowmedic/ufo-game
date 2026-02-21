@@ -51,6 +51,10 @@ class SoundManager {
      * @param {Function} onComplete - Callback when all sounds are loaded
      */
     loadAllSounds(onComplete) {
+        this.onComplete = onComplete;
+        this.totalSounds = 0;
+        this.loadedSounds = 0;
+
         // UFO sounds
         this.loadSound('ufo', 'engine_loop', 'assets/sounds/ufo/engine_loop.mp3', true);
         this.loadSound('ufo', 'tractor_beam', 'assets/sounds/ufo/tractor_beam.mp3', false);
@@ -73,7 +77,7 @@ class SoundManager {
         
         // Check if we have sounds to load
         if (this.totalSounds === 0) {
-            if (onComplete) onComplete();
+            if (this.onComplete) this.onComplete();
         }
     }
     
