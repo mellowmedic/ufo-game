@@ -16,6 +16,7 @@ class VisualEffects {
         this.pixelPass = null;
         this.vignettePass = null;
         this.colorShiftPass = null;
+        this.initialized = false;
         
         // Effect settings
         this.settings = {
@@ -53,6 +54,10 @@ class VisualEffects {
      * Initialize the visual effects
      */
     init() {
+        if (this.initialized) {
+            return;
+        }
+
         // Create effect composer
         this.composer = new THREE.EffectComposer(this.renderer);
         
@@ -74,6 +79,8 @@ class VisualEffects {
         
         // Resize composer to match renderer
         this.resize();
+
+        this.initialized = true;
     }
     
     /**
@@ -262,6 +269,10 @@ class VisualEffects {
      * Render the scene with effects
      */
     render() {
+        if (!this.initialized || !this.composer) {
+            return;
+        }
+
         // Apply screen shake if active
         if (this.settings.screenShake.enabled && this.settings.screenShake.intensity > 0) {
             this.applyScreenShake();
