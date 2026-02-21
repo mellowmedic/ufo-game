@@ -58,6 +58,18 @@ class VisualEffects {
             return;
         }
 
+        const hasPostProcessing = Boolean(
+            THREE.EffectComposer &&
+            THREE.RenderPass &&
+            THREE.ShaderPass
+        );
+
+        if (!hasPostProcessing) {
+            console.warn('Post-processing dependencies are unavailable; using direct renderer fallback.');
+            this.initialized = false;
+            return;
+        }
+
         // Create effect composer
         this.composer = new THREE.EffectComposer(this.renderer);
         
@@ -270,6 +282,7 @@ class VisualEffects {
      */
     render() {
         if (!this.initialized || !this.composer) {
+            this.renderer.render(this.scene, this.camera);
             return;
         }
 
