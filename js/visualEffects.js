@@ -17,6 +17,7 @@ class VisualEffects {
         this.vignettePass = null;
         this.colorShiftPass = null;
         this.initialized = false;
+        this.effectsAvailable = false;
         
         // Effect settings
         this.settings = {
@@ -58,8 +59,22 @@ class VisualEffects {
             return;
         }
 
+        const hasPostProcessing = (
+            typeof THREE.EffectComposer === 'function' &&
+            typeof THREE.RenderPass === 'function' &&
+            typeof THREE.ShaderPass === 'function'
+        );
+
+        if (!hasPostProcessing) {
+            console.warn('Post-processing modules are unavailable; visual effects are disabled.');
+            this.initialized = true;
+            this.effectsAvailable = false;
+            return;
+        }
+
         // Create effect composer
         this.composer = new THREE.EffectComposer(this.renderer);
+        this.effectsAvailable = true;
         
         // Add render pass
         this.renderPass = new THREE.RenderPass(this.scene, this.camera);
@@ -269,7 +284,8 @@ class VisualEffects {
      * Render the scene with effects
      */
     render() {
-        if (!this.initialized || !this.composer) {
+        if (!this.initialized || !this.composer || !this.effectsAvailable) {
+            this.renderer.render(this.scene, this.camera);
             return;
         }
 
